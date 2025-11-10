@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "singularName": "recipe",
+    "pluralName": "recipes",
+    "displayName": "Recipe"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "difficulty": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "time": {
+      "type": "integer"
+    }
+  }
+}
