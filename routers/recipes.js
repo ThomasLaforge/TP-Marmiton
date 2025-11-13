@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { db } from "../index.js";
+import { checkToken } from "../middleware/checkToken.js";
 
 export const recipesRouter = Router();
 
@@ -8,7 +9,7 @@ recipesRouter.get("/", async (req, res) => {
   res.json(recipes);
 });
 
-recipesRouter.post("/", async (req, res) => {
+recipesRouter.post("/", checkToken, async (req, res) => {
   const { title, difficulty, price, time } = req.body;
   const result = await db.run(
     "INSERT INTO recipes (title, difficulty, price, time) VALUES (?, ?, ?, ?)",
@@ -48,7 +49,7 @@ recipesRouter.get("/:id", async (req, res) => {
 // });
 
 // recipesRouter.patch("/:id", async (req, res) => {
-recipesRouter.put("/:id", async (req, res) => {
+recipesRouter.put("/:id", checkToken, async (req, res) => {
   const { id } = req.params;
   const fields = [];
   const values = [];
@@ -74,7 +75,7 @@ recipesRouter.put("/:id", async (req, res) => {
   }
 });
 
-recipesRouter.delete("/:id", async (req, res) => {
+recipesRouter.delete("/:id", checkToken, async (req, res) => {
   const { id } = req.params;
   const result = await db.run("DELETE FROM recipes WHERE id = ?", [id]);
   if (result.changes > 0) {

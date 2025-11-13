@@ -1,8 +1,10 @@
-import cors from "cors";
+import 'dotenv/config';
 import express, { Router } from "express";
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
+import { authRouter } from "./routers/auth.js";
 import { recipesRouter } from "./routers/recipes.js";
+import { usersRouter } from './routers/users.js';
 
 export const db = await open({
   filename: "./marmiton.db",
@@ -17,14 +19,22 @@ await db.exec(`
     price INTEGER,
     time INTEGER
   );
+
+  CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    email TEXT UNIQUE,
+    password TEXT
+  );
 `);
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
 const apiRouter = Router()
 apiRouter.use("/recipes", recipesRouter);
+apiRouter.use("/auth", authRouter);
+apiRouter.use("/users", usersRouter);
 app.use("/api", apiRouter);
 
 app.listen(1337, () => {

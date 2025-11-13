@@ -1,9 +1,9 @@
 @url = http://localhost:1337
 ### Variables
-# @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzYyNzcyMTExLCJleHAiOjE3NjUzNjQxMTF9._Lvx3BYAP7Da3FIxH8ih1QWCQOSEQMPK3vMjeMOrWoU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0aG9tYXMubGFmYXJjZUBnbWFpbC5jb20iLCJpYXQiOjE3NjI5OTc5OTAsImV4cCI6MTc2MzAwMTU5MH0.XTa09Zg_1fPQq0HD8brA_vXuWynhKyGGZY9OZlDn3wo
 
 ### Hardcoded
-@token = e40114d4eb43c2d36fa3828789e23a4bbd4979550c0c9a233c8deb97eca9fab8e88c36d8f2f75344ebbd867aa21f3de8e0d37a207c168138792dc8124d779d8326c20a68b9c811852947330b907100ec3910234febec15f6e887b7dd1b358d9a82cb3584b2139ce07da92232740993f270bb4b382fd7b5769677a423894d6460
+# @token = e40114d4eb43c2d36fa3828789e23a4bbd4979550c0c9a233c8deb97eca9fab8e88c36d8f2f75344ebbd867aa21f3de8e0d37a207c168138792dc8124d779d8326c20a68b9c811852947330b907100ec3910234febec15f6e887b7dd1b358d9a82cb3584b2139ce07da92232740993f270bb4b382fd7b5769677a423894d6460
 
 ### Auth
 POST {{url}}/api/auth/local/register
@@ -30,7 +30,7 @@ POST {{url}}/api/auth/local
 Content-Type: application/json
 
 {
-  "identifier": "thomas",
+  "identifier": "thomas.lafarce@gmail.com",
   "password": "8hfds/f!ndfs"
 }
 

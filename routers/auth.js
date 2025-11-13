@@ -46,5 +46,4 @@ authRouter.post("/local/", async (req, res) => {
   delete user.password;
 
   res.json({ ...user, jwt: token });
-
 });

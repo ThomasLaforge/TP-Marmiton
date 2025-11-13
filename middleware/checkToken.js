@@ -12,6 +12,8 @@ export const checkToken = (req, res, next) => {
     if(!jwt.verify(token, process.env.SECRET)) {
       return res.status(401).json({ error: "Unauthorized" });
     }
+    const decoded = jwt.decode(token);
+    req.user = { id: decoded.id };
     next();
   } else {
     res.status(401).json({ error: "Unauthorized" });
