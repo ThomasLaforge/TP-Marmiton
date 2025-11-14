@@ -10,10 +10,14 @@ recipesRouter.get("/", async (req, res) => {
 });
 
 recipesRouter.post("/", checkToken, async (req, res) => {
-  const { title, difficulty, price, time } = req.body;
+  if(!req.body.data) {
+    return res.status(400).json({ error: "Missing recipe data" });
+  }
+  const { title, difficulty, price, time } = req.body.data;
+  const newDocumentId = crypto.randomUUID();
   const result = await db.run(
-    "INSERT INTO recipes (title, difficulty, price, time) VALUES (?, ?, ?, ?)",
-    [title, difficulty, price, time]
+    "INSERT INTO recipes (documentId, title, difficulty, price, time) VALUES (?, ?, ?, ?, ?)",
+    [newDocumentId, title, difficulty, price, time]
   );
   const newRecipe = await db.get("SELECT * FROM recipes WHERE id = ?", [
     result.lastID,
@@ -21,9 +25,9 @@ recipesRouter.post("/", checkToken, async (req, res) => {
   res.status(201).json(newRecipe);
 });
 
-recipesRouter.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const recipe = await db.get("SELECT * FROM recipes WHERE id = ?", [id]);
+recipesRouter.get("/:documentId", async (req, res) => {
+  const { documentId } = req.params;
+  const recipe = await db.get("SELECT * FROM recipes WHERE documentId = ?", [documentId ]);
   if (recipe) {
     res.json(recipe);
   } else {
@@ -49,25 +53,27 @@ recipesRouter.get("/:id", async (req, res) => {
 // });
 
 // recipesRouter.patch("/:id", async (req, res) => {
-recipesRouter.put("/:id", checkToken, async (req, res) => {
-  const { id } = req.params;
+recipesRouter.put("/:documentId", checkToken, async (req, res) => {
+  const { documentId } = req.params;
   const fields = [];
   const values = [];
 
-  for (const [key, value] of Object.entries(req.body)) {
+  const data = req.body.data;
+
+  for (const [key, value] of Object.entries(data)) {
     fields.push(`${key} = ?`);
     values.push(value);
   }
-  values.push(id);
+  values.push(documentId);
 
   const result = await db.run(
-    `UPDATE recipes SET ${fields.join(", ")} WHERE id = ?`,
+    `UPDATE recipes SET ${fields.join(", ")} WHERE documentId = ?`,
     values
   );
 
   if (result.changes > 0) {
-    const updatedRecipe = await db.get("SELECT * FROM recipes WHERE id = ?", [
-      id,
+    const updatedRecipe = await db.get("SELECT * FROM recipes WHERE documentId = ?", [
+      documentId,
     ]);
     res.json(updatedRecipe);
   } else {
@@ -75,13 +81,12 @@ recipesRouter.put("/:id", checkToken, async (req, res) => {
   }
 });
 
-recipesRouter.delete("/:id", checkToken, async (req, res) => {
-  const { id } = req.params;
-  const result = await db.run("DELETE FROM recipes WHERE id = ?", [id]);
+recipesRouter.delete("/:documentId", checkToken, async (req, res) => {
+  const { documentId } = req.params;
+  const result = await db.run("DELETE FROM recipes WHERE documentId = ?", [documentId]);
   if (result.changes > 0) {
     res.status(204).end();
   } else {
     res.status(404).json({ error: "Recipe not found" });
   }
 });
-

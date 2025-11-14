@@ -14,6 +14,7 @@ export const db = await open({
 await db.exec(`
   CREATE TABLE IF NOT EXISTS recipes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    documentId TEXT,
     title TEXT,
     difficulty INTEGER,
     price INTEGER,

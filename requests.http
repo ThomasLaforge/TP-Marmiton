@@ -1,6 +1,6 @@
 @url = http://localhost:1337
 ### Variables
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0aG9tYXMubGFmYXJjZUBnbWFpbC5jb20iLCJpYXQiOjE3NjI5OTc5OTAsImV4cCI6MTc2MzAwMTU5MH0.XTa09Zg_1fPQq0HD8brA_vXuWynhKyGGZY9OZlDn3wo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0aG9tYXMubGFmYXJjZUBnbWFpbC5jb20iLCJpYXQiOjE3NjMxMjU3NjIsImV4cCI6MTc2MzEyOTM2Mn0.XJcWn6WSONcTwHJidyEultaLFlmfK3oL8tgnblTfkAw
 
 ### Hardcoded
 # @token = e40114d4eb43c2d36fa3828789e23a4bbd4979550c0c9a233c8deb97eca9fab8e88c36d8f2f75344ebbd867aa21f3de8e0d37a207c168138792dc8124d779d8326c20a68b9c811852947330b907100ec3910234febec15f6e887b7dd1b358d9a82cb3584b2139ce07da92232740993f270bb4b382fd7b5769677a423894d6460
@@ -40,7 +40,6 @@ Authorization: Bearer {{token}}
 
 ### Get recipes
 GET {{url}}/api/recipes
-Authorization: Bearer {{token}}
 
 ### Create recipe
 POST {{url}}/api/recipes
@@ -110,9 +109,8 @@ Authorization: Bearer {{token}}
 }
 
 ### Delete recipe
-DELETE {{url}}/api/recipes/bnn6eircdd3tpqsnmt657ylm
+DELETE {{url}}/api/recipes/9739ed9c-7682-4212-bdde-9c5cc174b7ad
 Authorization: Bearer {{token}}
 
 ### Get recipes where price is 1
-GET {{url}}/api/recipes?filters[price][$eq]=1
-Authorization: Bearer {{token}}
+GET {{url}}/api/recipes/
