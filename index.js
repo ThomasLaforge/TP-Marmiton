@@ -33,7 +33,7 @@ const app = express();
 app.use(express.json());
 
 const apiRouter = Router()
-apiRouter.use("/recipes", recipesRouter);
+apiRouter.use("/recettes", recipesRouter);
 apiRouter.use("/auth", authRouter);
 apiRouter.use("/users", usersRouter);
 app.use("/api", apiRouter);
