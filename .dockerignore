@@ -1,0 +1,10 @@
+node_modules
+marmiton.db
+requests.http
+.nvmrc
+.DS_Store
+.git
+strapi
+.dockerignore
+.gitignore
+Dockerfile
